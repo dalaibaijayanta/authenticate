@@ -1,0 +1,12 @@
+<%- include('partials/head', { title: 'Access Denied' }) %>
+  <h1>Access Denied</h1>
+  <p class="message error">You do not have permission to view this page.</p>
+
+  <div class="actions">
+    <% if (loggedIn) { %>
+      <a class="button" href="/dashboard">Back to my dashboard</a>
+    <% } else { %>
+      <a class="button" href="/login">Log in</a>
+    <% } %>
+  </div>
+<%- include('partials/foot') %>

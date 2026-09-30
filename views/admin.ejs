@@ -1,0 +1,46 @@
+<%- include('partials/head', { title: 'Admin Dashboard', wide: true }) %>
+  <h1>Admin dashboard</h1>
+  <p>Logged in as <%= admin.name %> (admin)</p>
+
+  <% if (message) { %>
+    <p class="message <%= type %>"><%= message %></p>
+  <% } %>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Registered</th><th>Action</th></tr>
+      </thead>
+      <tbody>
+      <% users.forEach(function (u) { %>
+        <tr>
+          <td><%= u.id %></td>
+          <%# XSS PROTECTION: someone could register with a script tag as their name.
+              The EJS output tag escapes it, so it shows as harmless text. %>
+          <td><%= u.name %></td>
+          <td><%= u.email %></td>
+          <td><%= u.role %></td>
+          <td><%= u.created_at %></td>
+          <td>
+            <% if (u.id !== admin.id) { %>
+              <form method="post" action="/admin/delete" class="delete-form">
+                <input type="hidden" name="id" value="<%= u.id %>">
+                <button type="submit" class="danger">Delete</button>
+              </form>
+            <% } else { %>
+              (you)
+            <% } %>
+          </td>
+        </tr>
+      <% }); %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="actions">
+    <a class="button secondary" href="/dashboard">My dashboard</a>
+    <form method="post" action="/logout">
+      <button type="submit" class="secondary">Log out</button>
+    </form>
+  </div>
+<%- include('partials/foot') %>

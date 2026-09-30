@@ -1,0 +1,16 @@
+{
+  "name": "secure-authentication-node",
+  "version": "1.0.0",
+  "description": "Beginner-friendly login system: Node.js, Express, MySQL",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "mysql2": "^3.24.5"
+  }
+}
